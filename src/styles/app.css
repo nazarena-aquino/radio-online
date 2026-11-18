@@ -1077,83 +1077,56 @@ button {
 
 .cover--sm {
   width: clamp(96px, 12vw, 132px);
-  font-size: 7px;
 }
 
 .cover--lg {
   width: 100%;
   max-width: 440px;
-  font-size: 16px;
 }
 
-.cover--brand {
+.cover--fallback {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  overflow: hidden;
-  padding: 0 5% 10% 0;
-  background: var(--black);
-  color: var(--white);
-}
-
-.cover__frame {
-  width: 78%;
-  background: var(--red);
-}
-
-.cover__card {
-  margin-right: 3.2%;
-  background: var(--white);
-  color: var(--black);
-}
-
-.cover__top {
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 3.2%;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #262626;
   background: var(--black);
   color: var(--white);
-  font-family: var(--font-display);
-  font-size: 0.68em;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  line-height: 1;
-  text-transform: uppercase;
 }
 
-.cover__top span:last-child {
+.cover__freq {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.cover__fm {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.3em;
   color: var(--red);
 }
 
-.cover__logo {
-  display: grid;
-  place-items: center;
-  padding: 12% 7%;
+.cover__place {
+  margin-top: 10px;
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  color: var(--gray-400);
 }
 
-.cover__logo img {
-  display: block;
-  width: 82%;
-  height: auto;
+.cover--sm .cover__freq {
+  font-size: 2.2rem;
 }
 
-.cover__bottom {
-  padding: 3.2% 0;
-  background: var(--red);
-  color: var(--black);
-  font-family: var(--font-display);
-  font-size: 0.58em;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  line-height: 1;
-  text-align: center;
-  text-transform: uppercase;
+.cover--sm .cover__fm {
+  font-size: 10px;
 }
 
-.cover--sm .cover__top span,
-.cover--sm .cover__bottom {
-  font-size: 0;
+.cover--sm .cover__place {
+  font-size: 8px;
 }
 
 /* ==========================================================================
@@ -1171,6 +1144,14 @@ button {
   position: relative;
   width: 100%;
   max-width: 460px;
+}
+
+.now-playing__cover-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  z-index: 0;
+  background: var(--red);
 }
 
 .now-playing__cover-wrap .cover {
