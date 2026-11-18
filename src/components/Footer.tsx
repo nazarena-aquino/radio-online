@@ -59,10 +59,17 @@ export function Footer() {
         <p className="footer__credit">
           Hecho con{" "}
           <span className="footer__heart" role="img" aria-label="corazón">
-            💜
+            ❤️
           </span>{" "}
           en {station.location} · Creación, diseño y producción de{" "}
-          <strong>CEO Multimedios</strong>
+          <a
+            className="footer__credit-link"
+            href="https://www.ceomultimedios.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CEO Multimedios
+          </a>
         </p>
       </div>
     </footer>

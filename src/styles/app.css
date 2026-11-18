@@ -1799,9 +1799,20 @@ button {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.footer__credit strong {
-  color: var(--white);
+.footer__heart {
+  color: var(--red);
+  font-size: 1.05em;
+}
+
+.footer__credit-link {
+  color: var(--red);
   font-weight: 600;
+  text-decoration: none;
+}
+
+.footer__credit-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ==========================================================================
