@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rock &amp; Pop 90.7 FM Formosa">
+  <rect width="64" height="64" fill="#000000"/>
+  <rect y="52" width="64" height="12" fill="#FF3038"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Arial Narrow, Arial, Helvetica, sans-serif" font-weight="700" font-size="26" letter-spacing="-1" fill="#FFFFFF">90.7</text>
+</svg>
