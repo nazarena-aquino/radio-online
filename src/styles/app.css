@@ -1778,13 +1778,30 @@ button {
 
 .footer__bottom {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px 24px;
-  padding-block: 22px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-block: 24px;
   border-top: 1px solid var(--line-dark);
-  font-size: 11px;
+  text-align: center;
+}
+
+.footer__copyright {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--gray-400);
+}
+
+.footer__credit {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.footer__credit strong {
+  color: var(--white);
+  font-weight: 600;
 }
 
 /* ==========================================================================

@@ -53,11 +53,16 @@ export function Footer() {
       </div>
 
       <div className="container footer__bottom">
-        <p>
-          © {year} {station.fullName}. Todos los derechos reservados.
+        <p className="footer__copyright">
+          © {year} {station.footerName} — Todos los derechos reservados
         </p>
-        <p>
-          {station.band} {station.frequency} · {station.location}
+        <p className="footer__credit">
+          Hecho con{" "}
+          <span className="footer__heart" role="img" aria-label="corazón">
+            💜
+          </span>{" "}
+          en {station.location} · Creación, diseño y producción de{" "}
+          <strong>CEO Multimedios</strong>
         </p>
       </div>
     </footer>

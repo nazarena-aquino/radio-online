@@ -58,6 +58,7 @@ export interface HeroCopy {
 export interface StationConfig {
   name: string;
   fullName: string;
+  footerName: string;
   frequency: string;
   band: string;
   location: string;

@@ -13,6 +13,7 @@ import type { StationConfig } from "../types";
 export const station: StationConfig = {
   name: "Rock & Pop",
   fullName: "Rock & Pop 90.7 FM Formosa",
+  footerName: "Rock&Pop 90.7 Formosa",
   frequency: "90.7",
   band: "FM",
   location: "Formosa, Argentina",
