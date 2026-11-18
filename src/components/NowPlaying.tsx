@@ -97,7 +97,7 @@ export function NowPlaying() {
   return (
     <div className="now-playing">
       <div className="now-playing__cover-wrap">
-        <Cover song={song} size="lg" />
+        <Cover size="lg" />
         <span className="now-playing__stamp">90.7 FM</span>
       </div>
 

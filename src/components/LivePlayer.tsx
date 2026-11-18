@@ -217,7 +217,7 @@ export function LivePlayer() {
       </div>
 
       <div className="player__now">
-        <Cover song={displaySong} size="sm" />
+        <Cover size="sm" />
         <div className="player__now-text">
           <p className="player__eyebrow">Ahora suena</p>
           {renderNowPlaying()}
