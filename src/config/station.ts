@@ -1,3 +1,4 @@
+import levitarFest from "../assets/levitar-fest.jpg";
 import type { StationConfig } from "../types";
 
 /**
@@ -51,6 +52,7 @@ export const station: StationConfig = {
     { id: "escuchar", label: "Escuchar" },
     { id: "programacion", label: "Programación" },
     { id: "la-radio", label: "La radio" },
+    { id: "auspiciantes", label: "Auspiciantes" },
     { id: "contacto", label: "Contacto" },
   ],
 
@@ -63,7 +65,16 @@ export const station: StationConfig = {
 
   // Auspiciantes reales confirmados. Mientras esté vacío, se muestra el espacio
   // disponible sin inventar marcas.
-  sponsors: [],
+  sponsors: [
+    {
+      id: "levitar-fest",
+      name: "Levitar Fest",
+      description: "19 de diciembre en JBC",
+      image: levitarFest,
+      url: "https://www.instagram.com/levitarfest/",
+      cta: "Levitar Fest en Instagram",
+    },
+  ],
 
   meta: {
     title: "Rock & Pop 90.7 FM Formosa — Radio en vivo",

@@ -41,6 +41,12 @@ export interface Sponsor {
   name: string;
   url?: string;
   logoUrl?: string;
+  /** Imagen promocional opcional. Si existe, el auspiciante se muestra como tarjeta destacada. */
+  image?: string;
+  /** Bajada corta debajo del nombre (fecha, lugar, etc.). */
+  description?: string;
+  /** Texto del enlace cuando hay imagen. */
+  cta?: string;
 }
 
 export interface NavItem {

@@ -13,7 +13,7 @@ export function SponsorsSection() {
             Auspiciantes
           </h2>
           <p className="sponsors__note">
-            Espacio disponible para marcas y proyectos.
+            Marcas y proyectos que acompañan la 90.7.
           </p>
         </div>
         <div data-reveal data-reveal-delay="1">
