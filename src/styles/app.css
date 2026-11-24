@@ -1589,6 +1589,10 @@ button {
   color: var(--ink-soft);
 }
 
+.sponsor-slot--cta {
+  margin-top: 24px;
+}
+
 .sponsor-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
