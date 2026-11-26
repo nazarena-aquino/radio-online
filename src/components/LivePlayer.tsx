@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { useAudio } from "../audio/AudioContext";
+import { getPlaybackUiState } from "../audio/playerUi";
 import { useNowPlaying } from "../hooks/useNowPlaying";
 import { Cover } from "./Cover";
 import {
@@ -43,16 +46,42 @@ export function LivePlayer() {
   } = useAudio();
   const { data, status: metadataStatus } = useNowPlaying();
 
+  const playback = getPlaybackUiState(status, isBuffering);
   const signal = getSignalState(isPlaying, data?.isOnline);
+  const metadataUnavailable = metadataStatus === "unavailable";
   const signalLabel =
-    metadataStatus === "loading" ? "VERIFICANDO" : SIGNAL_LABEL[signal];
+    metadataStatus === "loading"
+      ? "VERIFICANDO"
+      : metadataUnavailable
+        ? "SIN DATOS"
+        : SIGNAL_LABEL[signal];
+  const signalClass = metadataUnavailable ? "unknown" : signal;
+  const volumePercent = isMuted ? 0 : Math.round(volume * 100);
+  const playingNow = isPlaying && !isBuffering;
+
+  const [metadataUpdating, setMetadataUpdating] = useState(false);
+  const lastUpdatedRef = useRef(data?.updatedAt);
+
+  useEffect(() => {
+    const updatedAt = data?.updatedAt;
+    if (!updatedAt || updatedAt === lastUpdatedRef.current) return;
+
+    lastUpdatedRef.current = updatedAt;
+    setMetadataUpdating(true);
+    const timer = window.setTimeout(() => setMetadataUpdating(false), 900);
+    return () => window.clearTimeout(timer);
+  }, [data?.updatedAt]);
 
   const displaySong =
     metadataStatus === "ready" && data?.isOnline ? data.song : null;
+  const songKey = displaySong
+    ? `${displaySong.artist}|${displaySong.title}|${displaySong.album}`
+    : metadataStatus;
+
   let stateLabel = "Listo para escuchar";
-  if (status === "error") stateLabel = "Error de conexión";
-  else if (status === "loading") stateLabel = "Conectando...";
-  else if (isPlaying && isBuffering) stateLabel = "Recargando señal...";
+  if (status === "error") stateLabel = "Sin conexión";
+  else if (status === "loading") stateLabel = "Conectando…";
+  else if (isPlaying && isBuffering) stateLabel = "Recargando señal…";
   else if (isPlaying) stateLabel = "Reproduciendo en vivo";
   else if (status === "paused") stateLabel = "Transmisión en pausa";
 
@@ -128,11 +157,11 @@ export function LivePlayer() {
     <section className="player" aria-labelledby="player-title">
       <div className="player__main">
         <div className="player__top">
-          <p className={`player__badge player__badge--${signal}`}>
+          <p className={`player__badge player__badge--${signalClass}`}>
             <span className="player__badge-dot" aria-hidden="true" />
             {signalLabel}
             <span
-              className={`eq ${isPlaying ? "is-active" : ""}`}
+              className={`eq ${playingNow ? "is-active" : ""}`}
               aria-hidden="true"
             >
               <span />
@@ -147,16 +176,21 @@ export function LivePlayer() {
         <div className="player__controls">
           <button
             type="button"
-            className="player__play"
+            className={`player__play${playback.isActive ? " is-active" : ""}${
+              playback.isLoading ? " is-loading" : ""
+            }`}
             onClick={toggle}
-            aria-label={
-              isPlaying
-                ? "Pausar la radio en vivo"
-                : "Reproducir la radio en vivo"
-            }
-            aria-pressed={isPlaying}
+            aria-label={playback.ariaLabel}
+            aria-pressed={playback.isActive}
+            aria-busy={playback.isLoading}
           >
-            {isPlaying ? <PauseIcon /> : <PlayIcon />}
+            {playback.icon === "pause" ? (
+              <PauseIcon />
+            ) : playback.icon === "retry" ? (
+              <RetryIcon />
+            ) : (
+              <PlayIcon />
+            )}
           </button>
 
           <div className="player__station">
@@ -200,12 +234,14 @@ export function LivePlayer() {
               min={0}
               max={100}
               step={1}
-              value={isMuted ? 0 : Math.round(volume * 100)}
+              value={volumePercent}
+              style={{ "--volume-progress": `${volumePercent}%` } as CSSProperties}
               onChange={(event) => setVolume(Number(event.target.value) / 100)}
               aria-label="Volumen de la radio"
+              aria-valuetext={`${volumePercent} por ciento`}
             />
             <span className="volume__value" aria-hidden="true">
-              {isMuted ? 0 : Math.round(volume * 100)}
+              {volumePercent}%
             </span>
           </div>
 
@@ -217,10 +253,19 @@ export function LivePlayer() {
       </div>
 
       <div className="player__now">
-        <Cover size="sm" />
+        <Cover size="sm" src={displaySong?.art} />
         <div className="player__now-text">
-          <p className="player__eyebrow">Ahora suena</p>
-          {renderNowPlaying()}
+          <div className="player__now-heading">
+            <p className="player__eyebrow">Ahora suena</p>
+            {metadataStatus === "loading" || metadataUpdating ? (
+              <span className="player__now-updating" aria-hidden="true">
+                Actualizando…
+              </span>
+            ) : null}
+          </div>
+          <div className="player__song" key={songKey}>
+            {renderNowPlaying()}
+          </div>
         </div>
       </div>
     </section>
