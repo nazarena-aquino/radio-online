@@ -253,7 +253,7 @@ export function LivePlayer() {
       </div>
 
       <div className="player__now">
-        <Cover size="sm" src={displaySong?.art} />
+        <Cover size="sm" />
         <div className="player__now-text">
           <div className="player__now-heading">
             <p className="player__eyebrow">Ahora suena</p>
