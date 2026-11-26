@@ -10,6 +10,7 @@ import {
 import type { ReactNode } from "react";
 import { station } from "../config/station";
 import type { PlayerStatus } from "../types";
+import { isPlaybackActive } from "./playerUi";
 
 interface RadioAudioValue {
   status: PlayerStatus;
@@ -139,7 +140,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggle = useCallback(() => {
-    if (status === "playing" || status === "loading") {
+    if (isPlaybackActive(status)) {
       pause();
     } else {
       start();
